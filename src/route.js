@@ -8,20 +8,31 @@ module.exports = http.createServer((req, res) => {
   console.log(`Request type: ${req.method} | Endpoint: ${urlParse.pathname}`);
   switch (req.method) {
     case "GET":
-      if (urlParse.pathname === "/users") {
-        apiOptions.getUsers(req, res);
+      if (urlParse.pathname === "/buys") {
+        apiOptions.getBuys(req, res);
       }
       break;
     case "POST":
-      if (urlParse.pathname === "/users") {
-        apiOptions.createUsers(req, res);
+      if (urlParse.pathname === "/buys") {
+        apiOptions.createBuys(req, res);
       }
       break;
     case "PUT":
-      apiOptions.updateUsers(req, res);
+      apiOptions.updateBuys(req, res);
       break;
-    case "DELETE":
-      apiOptions.deleteUsers(req, res);
+    case "GET":
+      apiOptions.deleteBuys(req, res);
+    
+    case "GET":
+      if (urlParse.pathname === "/buysCompleted") {
+        apiOptions.getBuysCompleted(req, res);
+      }
+      break;
+    case "GET":
+      if (urlParse.pathname === "/buysUncompleted") {
+        apiOptions.getBuysUncompleted(req, res);
+      }
+      break;
     default:
       return;
   }

@@ -1,9 +1,44 @@
 const url = require("url");
 const { bodyParser } = require("./midd/bodyParser.js");
-const database = [];
+const database = [
+{
+    "id": "1",
+    "name": "item 1",
+    "description": "itemd escription 1",
+    "date": "2024-12-15",
+    "isCompleted": true
+},
+{
+    "id": "2",
+    "name": "item 2",
+    "description": "item description 2",
+    "date": "2024-12-15",
+    "isCompleted": false
+},
+{
+    "id": "3",
+    "name": "item 3",
+    "description": "item description 3",
+    "date": "2024-12-18",
+    "isCompleted": true
+},
+{
+    "id": "4",
+    "name": "item 4",
+    "description": "item description 5",
+    "date": "2024-12-20",
+    "isCompleted": false
+},
+{
+    "id": "5",
+    "name": "item 5",
+    "description": "item description 5",
+    "date": "2024-12-21",
+    "isCompleted": true
+}];
 
-//  Get all users
-exports.getUsers = function(req, res) {
+//  listar compras
+exports.getBuys = function(req, res) {
     let response = [
         {
             "message": "All users"
@@ -15,8 +50,8 @@ exports.getUsers = function(req, res) {
     res.end(JSON.stringify(response));
 }
 
-// Crear usuarios
-exports.createUsers = async function(req, res) {
+// Crear compra
+exports.createBuys = async function(req, res) {
     await bodyParser(req);
     database.push(req.body);
     let response = [
@@ -30,8 +65,8 @@ exports.createUsers = async function(req, res) {
     res.end(JSON.stringify(response));
 }
 
-// Update one users
-exports.updateUsers = async function(req, res) {
+// Actualizar Compra
+exports.updateBuys = async function(req, res) {
     const urlParse = url.parse(req.url, true);
 
     const idQuery = urlParse.path.split("?")[1];
@@ -52,8 +87,8 @@ exports.updateUsers = async function(req, res) {
 
 }
 
-// Delete one user
-exports.deleteUsers = async function(req, res) {
+// eliminar Comprra 
+exports.deleteBuys = async function(req, res) {
     const urlParse = url.parse(req.url, true);
 
     const idQuery = urlParse.path.split("?")[1];
@@ -71,4 +106,35 @@ exports.deleteUsers = async function(req, res) {
         res.end(JSON.stringify({"message": "Wrong request query"}));
     }
 
+}
+
+//  Listar Completados 
+exports.getBuysCompleted = function(req, res) {
+    let response = database.filter(item => item.isCompleted === true);
+    
+    // let response = [
+    //     {
+    //         "message": "All users"
+    //     },
+    //     database
+    // ]
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(response));
+}
+
+
+//  Listar faltantes
+exports.getBuysUncompleted = function(req, res) {
+
+    let response = database.filter(item => item.isCompleted === false);
+    // let response = [
+    //     {
+    //         "message": "All users"
+    //     },
+    //     database
+    // ]
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(response));
 }
