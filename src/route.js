@@ -10,6 +10,10 @@ module.exports = http.createServer((req, res) => {
     case "GET":
       if (urlParse.pathname === "/buys") {
         apiOptions.getBuys(req, res);
+      } else if (urlParse.pathname === "/buysCompleted") {
+        apiOptions.getBuysCompleted(req, res);
+      } else if (urlParse.pathname === "/buysUncompleted") {
+      apiOptions.getBuysUncompleted(req, res);
       }
       break;
     case "POST":
@@ -20,18 +24,8 @@ module.exports = http.createServer((req, res) => {
     case "PUT":
       apiOptions.updateBuys(req, res);
       break;
-    case "GET":
+    case "DELETE":
       apiOptions.deleteBuys(req, res);
-    
-    case "GET":
-      if (urlParse.pathname === "/buysCompleted") {
-        apiOptions.getBuysCompleted(req, res);
-      }
-      break;
-    case "GET":
-      if (urlParse.pathname === "/buysUncompleted") {
-        apiOptions.getBuysUncompleted(req, res);
-      }
       break;
     default:
       return;

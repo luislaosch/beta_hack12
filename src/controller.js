@@ -41,7 +41,7 @@ const database = [
 exports.getBuys = function(req, res) {
     let response = [
         {
-            "message": "All users"
+            "message": "All Buys"
         },
         database
     ]
@@ -56,7 +56,7 @@ exports.createBuys = async function(req, res) {
     database.push(req.body);
     let response = [
         {
-            "message": "Created a users"
+            "message": "Created a Buys"
         },
         database,
     ];
@@ -78,7 +78,7 @@ exports.updateBuys = async function(req, res) {
         database[value - 1] = req.body;
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify({"message": "An user has been updated"}));
+        res.end(JSON.stringify({"message": "An buy has been updated"}));
     } else {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
@@ -99,7 +99,7 @@ exports.deleteBuys = async function(req, res) {
         database.splice(value - 1, 1);
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify({"message": "An user has been deleted"}));
+        res.end(JSON.stringify({"message": "An Buy has been deleted"}));
     } else {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
@@ -110,14 +110,15 @@ exports.deleteBuys = async function(req, res) {
 
 //  Listar Completados 
 exports.getBuysCompleted = function(req, res) {
-    let response = database.filter(item => item.isCompleted === true);
     
-    // let response = [
-    //     {
-    //         "message": "All users"
-    //     },
-    //     database
-    // ]
+    const completedBuys = database.filter(item => item.isCompleted === true);
+    
+    let response = [
+        {
+            "message": "All buys completed"
+        },
+        completedBuys
+    ]
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.end(JSON.stringify(response));
@@ -127,13 +128,14 @@ exports.getBuysCompleted = function(req, res) {
 //  Listar faltantes
 exports.getBuysUncompleted = function(req, res) {
 
-    let response = database.filter(item => item.isCompleted === false);
-    // let response = [
-    //     {
-    //         "message": "All users"
-    //     },
-    //     database
-    // ]
+    const completedBuys = database.filter(item => item.isCompleted === false);
+    
+    let response = [
+        {
+            "message": "All buys uncompleted"
+        },
+        completedBuys
+    ]
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.end(JSON.stringify(response));
