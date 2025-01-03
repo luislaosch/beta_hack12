@@ -1,5 +1,5 @@
 const url = require("url");
-const { bodyParser } = require("./libs/bodyParser.js");
+const { bodyParser } = require("./midd/bodyParser.js");
 const database = [];
 
 //  Get all users
